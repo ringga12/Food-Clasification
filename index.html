@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<title>Food Clasification</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <a href="#home" class="w3-bar-item w3-button">Indonesia food clasification</a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+  <img class="w3-image" src="/w3images/hamburger.jpg" alt="Hamburger Catering" width="1600" height="800">
+  <div class="w3-display-bottomleft w3-padding-large w3-opacity">
+    <h1 class="w3-xxlarge">Indonesia food </h1>
+  </div>
+</header>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+
+  <!-- About Section -->
+  <div class="w3-row w3-padding-64" id="about">
+    <div class="w3-col m6 w3-padding-medium w3-hide-small">
+     <img src="beef-tenderloin-satay-indonesian-food-id-131662.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="500">
+    </div>
+
+    <div class="w3-col m6 w3-padding-large">
+      <h1 class="w3-center">About model</h1><br>
+      <h5 class="w3-center">Indonesia food clasificication</h5>
+      <p class="w3-content">Program deep learning ini adalah pengenalan citra pada makanan mieayam bakso dan sate dengan menggunakan algoritma Convolutional Neural Network (CNN) yaitu salah satu jenis neural network yang bisa digunakan pada data image. CNN bisa digunakan untuk mendeteksi dan mengenali object pada sebuah image sehingga dapat diklasifikasikan sesuai dengan kelompoknya <span class="w3-tag w3-light-grey">
+    </div>
+  </div>
+  
+  <hr>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            const Url = 'http://127.0.0.1:5000/predict'
+            
+            window.addEventListener('load', function() {
+            document.querySelector('input[type="file"]').addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    var img = document.getElementById('imageData');  
+                    img.src = URL.createObjectURL(this.files[0]); 
+
+                    var data = new FormData()
+                    data.append('file', this.files[0])
+
+                    fetch(Url, {
+                        method: 'POST',
+                        body: data
+                    })
+                    .then(response => response.json())
+                    .then(response => document.getElementById('classText').innerHTML = response.class_name)
+                    .catch(error => console.log(error))
+                }
+            });
+            });
+        </script>
+    </head>
+<body>
+        
+        <h5 class="w3-center">Test image clasification</h5>
+        <input type='file' />
+        <br><br>
+        <img id="imageData" src="#" alt="your image" height=500>
+        <br><br>
+        <h2 id="classText"></h2>
+    </body>
+</html>
+    
+</html>
